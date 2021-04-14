@@ -3,6 +3,7 @@ package d19124603;
 import ie.tudublin.*;
 
 public class GivagoVisual extends Visual {
+    boolean twocubes = false;
     WaveForm wf;
     AudioBandsVisual abv;
 
@@ -30,22 +31,70 @@ public class GivagoVisual extends Visual {
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
         }
+
+        if (key == '1') {
+            twocubes = !twocubes;
+
+        }
+
     }
+
+    float smoothedBoxSize = 0;
 
     public void draw() {
-        background(0);
-        try {
-            // Call this if you want to use FFT data
-            calculateFFT();
-        } catch (VisualException e) {
-            e.printStackTrace();
-        }
-        // Call this is you want to use frequency bands
-        calculateFrequencyBands();
-
-        // Call this is you want to get the average amplitude
         calculateAverageAmplitude();
-        wf.render();
+        background(0);
+        noFill();
+        lights();
+        stroke(map(getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
+        camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+        translate(0, 0, -250);
 
+        float boxSize = 50 + (getAmplitude() * 300);// map(average, 0, 1, 100, 400);
+        smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.2f);
+        if (twocubes) {
+            pushMatrix();
+            translate(-100, 0, 0);
+            rotateY(angle);
+            rotateX(angle);
+            strokeWeight(1);
+            sphere(smoothedBoxSize / 8);
+            strokeWeight(5);
+            box(smoothedBoxSize / 2);
+            rotateY(angle);
+            rotateX(angle);
+            strokeWeight(5);
+            box(smoothedBoxSize / 3);
+            popMatrix();
+            pushMatrix();
+            translate(100, 0, 0);
+            rotateY(angle);
+            rotateX(angle);
+            strokeWeight(1);
+            sphere(smoothedBoxSize / 8);
+            strokeWeight(5);
+            box(smoothedBoxSize / 2);
+            rotateY(angle);
+            rotateX(angle);
+            strokeWeight(5);
+            box(smoothedBoxSize / 3);
+            popMatrix();
+        } else {
+            rotateY(angle);
+            rotateX(angle);
+            strokeWeight(1);
+            sphere(smoothedBoxSize / 8);
+            strokeWeight(2);
+            box(smoothedBoxSize / 2);
+            rotateX(angle);
+            rotateY(angle);
+            strokeWeight(2);
+            box(smoothedBoxSize / 3);
+
+        }
+        angle += 0.01f;
     }
+
+    float angle = 0;
+
 }

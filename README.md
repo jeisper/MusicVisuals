@@ -1,10 +1,11 @@
 # Music Visualiser Project
 
-Name:
+Name: Givago Teixeira Guimaraes
 
-Student Number: 
+Student Number: D19124603
 
 ## Instructions
+
 - Fork this repository and use it a starter project for your assignment
 - Create a new package named your student number and put all your code in this package.
 - You should start by creating a subclass of ie.tudublin.Visual
@@ -21,7 +22,7 @@ Student Number:
 
 # Markdown Tutorial
 
-This is *emphasis*
+This is _emphasis_
 
 This is a bulleted list
 
@@ -36,8 +37,11 @@ This is a numbered list
 This is a [hyperlink](http://bryanduggan.org)
 
 # Headings
+
 ## Headings
+
 #### Headings
+
 ##### Headings
 
 This is code:
@@ -80,10 +84,9 @@ This is a youtube video:
 
 This is a table:
 
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-
+| Heading 1  | Heading 2                      |
+| ---------- | ------------------------------ |
+| Some stuff | Some more stuff in this column |
+| Some stuff | Some more stuff in this column |
+| Some stuff | Some more stuff in this column |
+| Some stuff | Some more stuff in this column |
