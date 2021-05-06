@@ -11,7 +11,7 @@ public class GivagoVisual extends Visual {
     boolean twocubes = false;
     WaveForm wf;
     AudioBandsVisual abv;
-    PVector v1, v2, v3, v4, v5, s1, s2, s3, s4;
+    PVector v1, v2, v3, v4, v5, v6, v7, v8, v9, s1, s2, s3, s4, s6, s7, s8, s9;
 
     public void settings() {
         size(1600, 1600, P3D);
@@ -24,10 +24,18 @@ public class GivagoVisual extends Visual {
         v3 = new PVector(-175, -100);
         v4 = new PVector(175, 100);
         v5 = new PVector(0, 0);
+        v6 = new PVector(-175, 100);
+        v7 = new PVector(175, -100);
+        v8 = new PVector(-175, 100);
+        v9 = new PVector(175, -100);
         s1 = new PVector(0, 0);
         s2 = new PVector(0, 0);
         s3 = new PVector(0, 0);
         s4 = new PVector(0, 0);
+        s6 = new PVector(0, 0);
+        s7 = new PVector(0, 0);
+        s8 = new PVector(0, 0);
+        s9 = new PVector(0, 0);
 
         surface.setResizable(true);
         startMinim();
@@ -67,7 +75,7 @@ public class GivagoVisual extends Visual {
         makeCube(v1.x, v1.y);
         v1.add(s1);
         if (v1.x > (175) && v1.y > (100)) {
-            v1.y = v1.y * (-1);
+            v1.y = (getAmplitude() * -(speed));
         }
         if (v1.y <= (-100)) {
             s1.y = 0;
@@ -81,18 +89,55 @@ public class GivagoVisual extends Visual {
 
     }
 
+    public void rightUp() {
+        makeCube(v8.x, v8.y);
+        v8.add(s8);
+        if (v8.x > (-175) && v8.y > (100)) {
+            v8.x = (getAmplitude() * +(speed));
+        }
+        if (v8.x >= (175)) {
+            s8.x = 0;
+            s8.y = (getAmplitude() * -(speed));
+            v8.x = 175;
+        }
+        if (v8.x >= 175 && v8.y <= -100) {
+            s8.y = 0;
+            v8.y = -100;
+        }
+
+    }
+
+    public void leftDown() {
+        makeCube(v9.x, v9.y);
+        v9.add(s9);
+        if (v9.x > (175) && v9.y > (-100)) {
+            v9.x = (getAmplitude() * -(speed));
+        }
+        if (v9.x <= (-175)) {
+            s9.x = 0;
+            s9.y = (getAmplitude() * +(speed));
+            v9.x = -175;
+        }
+        if (v9.x <= -175 && v9.y >= 100) {
+            s9.y = 0;
+            v9.y = 100;
+        }
+
+    }
+
     public void downRight() {
         makeCube(v2.x, v2.y);
         v2.add(s2);
-        if (v2.x > (-175) && v2.y > (-100)) {
-            v2.y = v2.y * (1);
+        if (v2.x < (-175) && v2.y < (-100)) {
+            v2.y = (getAmplitude() * +(speed));
         }
         if (v2.y >= (100)) {
             s2.y = 0;
-            s2.x = (getAmplitude() * +(speed));
             v2.y = 100;
+            s2.x = (getAmplitude() * +(speed));
+
         }
-        if (v2.x >= 175 && v2.y >= -100) {
+        if (v2.x >= 175 && v2.y >= 100) {
             s2.x = 0;
             v2.x = 175;
         }
@@ -119,6 +164,27 @@ public class GivagoVisual extends Visual {
         }
     }
 
+    public void leftToRight() {
+        makeCube(v6.x, v6.y);
+        v6.add(s6);
+
+        if (v6.x < (-175) && v6.y > (-100)) {
+            v6.y = (getAmplitude() * -(speed));
+            v6.x = (getAmplitude() * +(speed));
+
+        }
+        println(v6.y);
+    }
+
+    public void rightToLeft() {
+        makeCube(v7.x, v7.y);
+        v7.add(s7);
+        if (v7.x > (175) && v7.y < (-100)) {
+            v7.y = (getAmplitude() * +(speed));
+            v7.x = (getAmplitude() * -(speed));
+        }
+    }
+
     public void keyPressed() {
         if (key == ' ') {
             getAudioPlayer().cue(0);
@@ -141,6 +207,12 @@ public class GivagoVisual extends Visual {
         s4.y = (getAmplitude() * -(speed));
         s3.x = (getAmplitude() * +(speed));
         s4.x = (getAmplitude() * -(speed));
+        s6.y = (getAmplitude() * -(speed));
+        s6.x = (getAmplitude() * +(speed));
+        s7.y = (getAmplitude() * +(speed));
+        s7.x = (getAmplitude() * -(speed));
+        s8.x = (getAmplitude() * +(speed));
+        s9.x = (getAmplitude() * -(speed));
 
         calculateAverageAmplitude();
         background(0);
@@ -153,14 +225,19 @@ public class GivagoVisual extends Visual {
         smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.2f);
 
         if (!step) {
+            makeCube(v5.x, v5.y);
             upLeft();
             downRight();
+            leftDown();
+            rightUp();
 
         }
         if (step) {
             makeCube(v5.x, v5.y);
             diagoLeftRight();
             diagoRightLeft();
+            leftToRight();
+            rightToLeft();
         }
 
         angle += 0.01f;
