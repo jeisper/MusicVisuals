@@ -6,9 +6,10 @@ import ie.tudublin.*;
 import processing.core.PVector;
 
 public class GivagoVisual extends Visual {
-    int size = 7;
-    int size2 = 5;
-    int speed = 50;
+    int size = 8;
+    int size2 = 6;
+    int size3 = 35;
+    int speed = 3;
     boolean step1 = true;
     boolean step2 = false;
     boolean step3 = false;
@@ -46,7 +47,7 @@ public class GivagoVisual extends Visual {
         startMinim();
 
         // Call loadAudio to load an audio file to process
-        loadAudio("rise.mp3");
+        loadAudio("galway.mp3");
 
         // Call this instead to read audio from the microphone
         startListening();
@@ -178,7 +179,6 @@ public class GivagoVisual extends Visual {
             v6.x = (getAmplitude() * +(speed));
 
         }
-        println(v6.y);
     }
 
     public void rightToLeft() {
@@ -192,9 +192,10 @@ public class GivagoVisual extends Visual {
 
     public void wholePage() {
         for (int i = 0; i < size; i++) {
-            v10.x = map(i, 0, size, -175, 175);
+            v10.x = map(i, 0, size, -200, 250);
             for (int j = 0; j < size2; j++) {
-                v10.y = map(j, 0, size, -100, 100);
+                v10.y = map(j, 0, size2, -100, 150);
+                makeCube(v10.x, v10.y);
             }
         }
 
@@ -271,8 +272,7 @@ public class GivagoVisual extends Visual {
 
         if (step3) {
             wholePage();
-            makeCube(v10.x, v10.y);
-            println("true");
+
         }
 
         angle += 0.01f;
