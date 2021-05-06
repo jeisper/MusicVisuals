@@ -4,7 +4,7 @@ Name: Givago Teixeira Guimaraes
 
 Student Number: D19124603
 
-Video: [Video](http://bryanduggan.org)
+Video: [Video](https://youtu.be/GmTVj-t-xfI)
 
 # Description of the assignment
 
