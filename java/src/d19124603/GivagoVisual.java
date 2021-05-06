@@ -6,12 +6,16 @@ import ie.tudublin.*;
 import processing.core.PVector;
 
 public class GivagoVisual extends Visual {
+    int size = 7;
+    int size2 = 5;
     int speed = 50;
-    boolean step = false;
+    boolean step1 = true;
+    boolean step2 = false;
+    boolean step3 = false;
     boolean twocubes = false;
     WaveForm wf;
     AudioBandsVisual abv;
-    PVector v1, v2, v3, v4, v5, v6, v7, v8, v9, s1, s2, s3, s4, s6, s7, s8, s9;
+    PVector v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, s1, s2, s3, s4, s6, s7, s8, s9;
 
     public void settings() {
         size(1600, 1600, P3D);
@@ -28,6 +32,7 @@ public class GivagoVisual extends Visual {
         v7 = new PVector(175, -100);
         v8 = new PVector(-175, 100);
         v9 = new PVector(175, -100);
+        v10 = new PVector(0, 0);
         s1 = new PVector(0, 0);
         s2 = new PVector(0, 0);
         s3 = new PVector(0, 0);
@@ -185,6 +190,16 @@ public class GivagoVisual extends Visual {
         }
     }
 
+    public void wholePage() {
+        for (int i = 0; i < size; i++) {
+            v10.x = map(i, 0, size, -175, 175);
+            for (int j = 0; j < size2; j++) {
+                v10.y = map(j, 0, size, -100, 100);
+            }
+        }
+
+    }
+
     public void keyPressed() {
         if (key == ' ') {
             getAudioPlayer().cue(0);
@@ -193,7 +208,21 @@ public class GivagoVisual extends Visual {
 
         if (key == '1') {
 
-            step = !step;
+            step1 = true;
+            step2 = false;
+            step3 = false;
+        }
+        if (key == '2') {
+
+            step2 = true;
+            step1 = false;
+            step3 = false;
+        }
+
+        if (key == '3') {
+            step2 = false;
+            step1 = false;
+            step3 = true;
         }
 
     }
@@ -224,7 +253,7 @@ public class GivagoVisual extends Visual {
         float boxSize = 50 + (getAmplitude() * 300);// map(average, 0, 1, 100, 400);
         smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.2f);
 
-        if (!step) {
+        if (step1) {
             makeCube(v5.x, v5.y);
             upLeft();
             downRight();
@@ -232,12 +261,18 @@ public class GivagoVisual extends Visual {
             rightUp();
 
         }
-        if (step) {
+        if (step2) {
             makeCube(v5.x, v5.y);
             diagoLeftRight();
             diagoRightLeft();
             leftToRight();
             rightToLeft();
+        }
+
+        if (step3) {
+            wholePage();
+            makeCube(v10.x, v10.y);
+            println("true");
         }
 
         angle += 0.01f;
