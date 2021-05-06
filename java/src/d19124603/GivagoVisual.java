@@ -10,10 +10,9 @@ public class GivagoVisual extends Visual {
     int size2 = 6;
     int size3 = 35;
     int speed = 3;
-    boolean step1 = true;
+    boolean step1 = false;
     boolean step2 = false;
-    boolean step3 = false;
-    boolean twocubes = false;
+    boolean step3 = true;
     WaveForm wf;
     AudioBandsVisual abv;
     PVector v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, s1, s2, s3, s4, s6, s7, s8, s9;
@@ -181,6 +180,21 @@ public class GivagoVisual extends Visual {
         }
     }
 
+    public void reset() {
+        makeCube(v5.x, v5.y);
+        upLeft();
+        downRight();
+        leftDown();
+        rightUp();
+        makeCube(v5.x, v5.y);
+        diagoLeftRight();
+        diagoRightLeft();
+        leftToRight();
+        rightToLeft();
+        wholePage();
+
+    }
+
     public void rightToLeft() {
         makeCube(v7.x, v7.y);
         v7.add(s7);
@@ -205,6 +219,8 @@ public class GivagoVisual extends Visual {
         if (key == ' ') {
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
+            reset();
+
         }
 
         if (key == '1') {
