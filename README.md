@@ -8,7 +8,7 @@ Video: [Video](https://youtu.be/GmTVj-t-xfI)
 
 # Description of the assignment
 
-This assignment is an cool animation of 3d squares that are drawn in the screen and that are spinning around themself they also have another squared drawn inside them and one sphere that moves and grows based on the music's frequencies and amplitude.
+This assignment is an cool animation of 3d squares that are drawn in the screen and that are spinning around themself they also have another squared drawn inside them and one sphere that moves and grows based on the music's frequencies and amplitude. Using the Music Galway Girl from Ed Sheeran.
 
 The main point of this assigment is to make a visual interaction with the elements given and try to change the screens by youself and make it visually atractive for the person who is changing the screens and the process.
 
